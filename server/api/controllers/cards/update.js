@@ -91,6 +91,18 @@ module.exports = {
     isSubscribed: {
       type: 'boolean',
     },
+    revenue: {
+      type: 'string',
+      allowNull: true,
+    },
+    purchaseCost: {
+      type: 'string',
+      allowNull: true,
+    },
+    salePrice: {
+      type: 'string',
+      allowNull: true,
+    },
   },
 
   exits: {
@@ -180,6 +192,9 @@ module.exports = {
       'isDueDateCompleted',
       'stopwatch',
       'isSubscribed',
+      'revenue',
+      'purchaseCost',
+      'salePrice',
     ]);
 
     card = await sails.helpers.cards.updateOne
