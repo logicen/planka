@@ -51,6 +51,7 @@ export default {
       createProject_title: 'Crear Proyecto',
       createTextFile_title: 'Crear archivo de Texto',
       currentPassword: 'Contraseña Actual',
+      costCenter: 'Centro de Costo',
       date: 'Fecha',
       dueDate_title: 'Fecha de Vencimiento',
       deleteAttachment_title: 'Borrar Adjunto',

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useCallback, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -24,6 +25,7 @@ import DueDateEditStep from '../DueDateEditStep';
 import StopwatchEditStep from '../StopwatchEditStep';
 import CardMoveStep from '../CardMoveStep';
 import DeleteStep from '../DeleteStep';
+import CostCenterStep from '../CostCenterStep';
 
 import styles from './CardModal.module.scss';
 
@@ -45,6 +47,9 @@ const CardModal = React.memo(
     users,
     labels,
     tasks,
+    purchaseCost,
+    salePrice,
+    revenue,
     attachments,
     activities,
     allProjectsToLists,
@@ -134,6 +139,23 @@ const CardModal = React.memo(
       [onUpdate],
     );
 
+    const handleUpdateCostCenter = useCallback(
+      (newPurchaseCost, newSalePrice) => {
+        let newRevenue = parseInt(newSalePrice, 10) - parseInt(newPurchaseCost, 10);
+
+        if (revenue) {
+          newRevenue += parseInt(revenue, 10);
+        }
+
+        onUpdate({
+          purchaseCost: newPurchaseCost,
+          salePrice: newSalePrice,
+          revenue: `${newRevenue}`,
+        });
+      },
+      [onUpdate, revenue],
+    );
+
     const handleCoverUpdate = useCallback(
       (newCoverAttachmentId) => {
         onUpdate({
@@ -185,6 +207,7 @@ const CardModal = React.memo(
     const StopwatchEditPopup = usePopup(StopwatchEditStep);
     const CardMovePopup = usePopup(CardMoveStep);
     const DeletePopup = usePopup(DeleteStep);
+    const CostCenterPopup = usePopup(CostCenterStep);
 
     const userIds = users.map((user) => user.id);
     const labelIds = labels.map((label) => label.id);
@@ -400,6 +423,17 @@ const CardModal = React.memo(
                 </div>
               </div>
             )}
+            <div>
+              <div className={styles.contentModule}>
+                <div className={styles.moduleWrapper}>
+                  <Icon name="dollar" className={styles.moduleIcon} />
+                  <div className={styles.moduleHeader}>{t('common.costCenter')}</div>
+                  <div className={styles.text}>Purchase Cost: $ {purchaseCost}</div>
+                  <div className={styles.text}>Sale Price: $ {salePrice}</div>
+                  <div className={styles.text}>Revenue: $ {revenue}</div>
+                </div>
+              </div>
+            </div>
             {(tasks.length > 0 || canEdit) && (
               <div className={styles.contentModule}>
                 <div className={styles.moduleWrapper}>
@@ -498,6 +532,16 @@ const CardModal = React.memo(
                     {t('common.attachment')}
                   </Button>
                 </AttachmentAddPopup>
+                <CostCenterPopup
+                  onUpdate={handleUpdateCostCenter}
+                  salePrice={salePrice}
+                  purchaseCost={purchaseCost}
+                >
+                  <Button fluid className={styles.actionButton}>
+                    <Icon name="dollar" className={styles.actionIcon} />
+                    {t('common.costCenter')}
+                  </Button>
+                </CostCenterPopup>
               </div>
               <div className={styles.actions}>
                 <span className={styles.actionsTitle}>{t('common.actions')}</span>
@@ -595,6 +639,9 @@ CardModal.propTypes = {
   labels: PropTypes.array.isRequired,
   tasks: PropTypes.array.isRequired,
   attachments: PropTypes.array.isRequired,
+  purchaseCost: PropTypes.string.isRequired,
+  salePrice: PropTypes.string.isRequired,
+  revenue: PropTypes.string.isRequired,
   activities: PropTypes.array.isRequired,
   allProjectsToLists: PropTypes.array.isRequired,
   allBoardMemberships: PropTypes.array.isRequired,

@@ -30,6 +30,9 @@ const mapStateToProps = (state) => {
     isActivitiesDetailsFetching,
     boardId,
     listId,
+    purchaseCost,
+    salePrice,
+    revenue,
   } = selectors.selectCurrentCard(state);
 
   const users = selectors.selectUsersForCurrentCard(state);
@@ -63,6 +66,9 @@ const mapStateToProps = (state) => {
     users,
     labels,
     tasks,
+    purchaseCost,
+    salePrice,
+    revenue,
     attachments,
     activities,
     allProjectsToLists,

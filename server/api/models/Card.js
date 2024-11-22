@@ -36,6 +36,18 @@ module.exports = {
     stopwatch: {
       type: 'json',
     },
+    revenue: {
+      type: 'string',
+      columnName: 'revenue',
+    },
+    purchaseCost: {
+      type: 'string',
+      columnName: 'purchase_cost',
+    },
+    salePrice: {
+      type: 'string',
+      columnName: 'sale_price',
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗

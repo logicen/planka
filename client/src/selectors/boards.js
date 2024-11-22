@@ -66,6 +66,39 @@ export const selectMembershipsForCurrentBoard = createSelector(
   },
 );
 
+export const getBoardRevenue = createSelector(
+  orm,
+  (state) => selectPath(state).boardId,
+  ({ Board }, id) => {
+    if (!id) {
+      return id;
+    }
+
+    const boardModel = Board.withId(id);
+
+    if (!boardModel) {
+      return boardModel;
+    }
+
+    const sum = boardModel
+      .getCardsQuerySet()
+      .toRefArray()
+      .reduce((acc, card) => {
+        const { listId } = card;
+        const list = boardModel
+          .getOrderedListsQuerySet()
+          .toRefArray()
+          .find((l) => l.id === listId);
+        if (list.name !== 'Finalizar Viaje' || !card.revenue) {
+          return acc;
+        }
+
+        return parseInt(acc, 10) + parseInt(card.revenue, 10);
+      }, 0);
+    return sum;
+  },
+);
+
 export const selectCurrentUserMembershipForCurrentBoard = createSelector(
   orm,
   (state) => selectPath(state).boardId,
@@ -197,6 +230,7 @@ export const selectIsBoardWithIdExists = createSelector(
 );
 
 export default {
+  getBoardRevenue,
   makeSelectBoardById,
   selectBoardById,
   selectCurrentBoard,
