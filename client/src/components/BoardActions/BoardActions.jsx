@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Filters from './Filters';
 import Memberships from '../Memberships';
+import Revenue from './Revenue';
 import BoardMembershipPermissionsSelectStep from '../BoardMembershipPermissionsSelectStep';
 
 import styles from './BoardActions.module.scss';
@@ -10,6 +11,7 @@ import styles from './BoardActions.module.scss';
 const BoardActions = React.memo(
   ({
     memberships,
+    revenue,
     labels,
     filterUsers,
     filterLabels,
@@ -63,6 +65,9 @@ const BoardActions = React.memo(
               onTextFilterUpdate={onTextFilterUpdate}
             />
           </div>
+          <div className={styles.action}>
+            <Revenue revenue={revenue} />
+          </div>
         </div>
       </div>
     );
@@ -79,6 +84,7 @@ BoardActions.propTypes = {
   allUsers: PropTypes.array.isRequired,
   /* eslint-enable react/forbid-prop-types */
   canEdit: PropTypes.bool.isRequired,
+  revenue: PropTypes.number.isRequired,
   canEditMemberships: PropTypes.bool.isRequired,
   onMembershipCreate: PropTypes.func.isRequired,
   onMembershipUpdate: PropTypes.func.isRequired,

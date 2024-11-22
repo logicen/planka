@@ -54,6 +54,9 @@ export default class extends BaseModel {
     }),
     users: many('User', 'cards'),
     labels: many('Label', 'cards'),
+    revenue: attr(),
+    salePrice: attr(),
+    purchasePrice: attr(),
   };
 
   static reducer({ type, payload }, Card) {

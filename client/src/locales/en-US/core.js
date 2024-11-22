@@ -7,6 +7,7 @@ export default {
     longDateTime: "MMMM d 'at' p",
     fullDate: 'MMM d, y',
     fullDateTime: "MMMM d, y 'at' p",
+    currency: '$ {{value}}',
   },
 
   translation: {
@@ -52,6 +53,7 @@ export default {
       cardOrActionAreDeleted: 'Card or action are deleted.',
       color: 'Color',
       copy_inline: 'copy',
+      costCenter: 'Cost Center',
       createBoard_title: 'Create Board',
       createLabel_title: 'Create Label',
       createNewOneOrSelectExistingOne: 'Create a new one or select<br />an existing one.',
@@ -136,8 +138,10 @@ export default {
         'Tip: press Ctrl-V (Cmd-V on Mac) to add an attachment from the clipboard.',
       project: 'Project',
       projectNotFound_title: 'Project Not Found',
+      purchasePrice: 'Purchase price',
       removeManager_title: 'Remove Manager',
       removeMember_title: 'Remove Member',
+      salePrice: 'Sale price',
       searchLabels: 'Search labels...',
       searchMembers: 'Search members...',
       searchUsers: 'Search users...',

@@ -227,6 +227,10 @@ export default class extends BaseModel {
     return this.lists.orderBy('position');
   }
 
+  getCardsQuerySet() {
+    return this.cards.orderBy('position');
+  }
+
   getOrderedMembershipsModelArray() {
     return orderBy(this.memberships.toModelArray(), (boardMembershipModel) =>
       boardMembershipModel.user.name.toLocaleLowerCase(),
