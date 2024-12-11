@@ -37,6 +37,15 @@ module.exports = {
     const boards = [...managerBoards, ...membershipBoards];
     const boardIds = sails.helpers.utils.mapRecords(boards);
 
+    // Get cards by id and calculate revenue
+    const cards = await sails.helpers.boards.getCards(boardIds);
+    const projectRevenue = cards.reduce((sum, card) => {
+      if (!card.revenue) {
+        return sum;
+      }
+      return parseInt(sum, 10) + parseInt(card.revenue, 10);
+    }, 0);
+
     boardMemberships = boardMemberships.filter((boardMembership) =>
       boardIds.includes(boardMembership.boardId),
     );
@@ -48,6 +57,7 @@ module.exports = {
         projectManagers,
         boards,
         boardMemberships,
+        projectRevenue,
       },
     };
   },

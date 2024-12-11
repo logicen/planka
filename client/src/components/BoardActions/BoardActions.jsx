@@ -10,6 +10,7 @@ import styles from './BoardActions.module.scss';
 
 const BoardActions = React.memo(
   ({
+    projectRevenue,
     memberships,
     revenue,
     labels,
@@ -66,7 +67,7 @@ const BoardActions = React.memo(
             />
           </div>
           <div className={styles.action}>
-            <Revenue revenue={revenue} />
+            <Revenue revenue={revenue} projectRevenue={projectRevenue} />
           </div>
         </div>
       </div>
@@ -84,7 +85,8 @@ BoardActions.propTypes = {
   allUsers: PropTypes.array.isRequired,
   /* eslint-enable react/forbid-prop-types */
   canEdit: PropTypes.bool.isRequired,
-  revenue: PropTypes.number.isRequired,
+  revenue: PropTypes.string.isRequired,
+  projectRevenue: PropTypes.string.isRequired,
   canEditMemberships: PropTypes.bool.isRequired,
   onMembershipCreate: PropTypes.func.isRequired,
   onMembershipUpdate: PropTypes.func.isRequired,
