@@ -48,10 +48,8 @@ module.exports = {
     }
 
     const projectManagers = await sails.helpers.projects.getProjectManagers(project.id);
-
     const userIds = sails.helpers.utils.mapRecords(projectManagers, 'userId');
     const users = await sails.helpers.users.getMany(userIds);
-
     return {
       item: project,
       included: {

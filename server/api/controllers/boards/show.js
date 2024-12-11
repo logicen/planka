@@ -76,6 +76,13 @@ module.exports = {
       card.isSubscribed = isSubscribedByCardId[card.id] || false;
     });
 
+    const boardRevenue = cards.reduce((result, card) => {
+      if (!card.revenue) {
+        return result;
+      }
+      return parseInt(result, 10) + parseInt(card.revenue, 10);
+    }, 0);
+
     if (inputs.subscribe && this.req.isSocket) {
       sails.sockets.join(this.req, `board:${board.id}`);
     }
@@ -92,6 +99,7 @@ module.exports = {
         cardLabels,
         tasks,
         attachments,
+        boardRevenue,
         projects: [project],
       },
     };

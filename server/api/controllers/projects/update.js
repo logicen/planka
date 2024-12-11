@@ -53,6 +53,10 @@ module.exports = {
       type: 'json',
       custom: backgroundImageValidator,
     },
+    projectRevenue: {
+      type: 'string',
+      allowNull: true,
+    },
   },
 
   exits: {
