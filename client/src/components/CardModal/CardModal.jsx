@@ -26,6 +26,7 @@ import StopwatchEditStep from '../StopwatchEditStep';
 import CardMoveStep from '../CardMoveStep';
 import DeleteStep from '../DeleteStep';
 import CostCenterStep from '../CostCenterStep';
+import FreightCostStep from '../FreightCostStep';
 
 import styles from './CardModal.module.scss';
 
@@ -208,6 +209,7 @@ const CardModal = React.memo(
     const CardMovePopup = usePopup(CardMoveStep);
     const DeletePopup = usePopup(DeleteStep);
     const CostCenterPopup = usePopup(CostCenterStep);
+    const FreightCostPopup = usePopup(FreightCostStep);
 
     const userIds = users.map((user) => user.id);
     const labelIds = labels.map((label) => label.id);
@@ -427,9 +429,7 @@ const CardModal = React.memo(
               <div className={styles.contentModule}>
                 <div className={styles.moduleWrapper}>
                   <Icon name="dollar" className={styles.moduleIcon} />
-                  <div className={styles.moduleHeader}>{t('common.costCenter')}</div>
-                  <div className={styles.text}>Purchase Cost: $ {purchaseCost}</div>
-                  <div className={styles.text}>Sale Price: $ {salePrice}</div>
+                  <div className={styles.moduleHeader}>{t('common.globalCost')}</div>
                   <div className={styles.text}>Revenue: $ {revenue}</div>
                 </div>
               </div>
@@ -532,10 +532,22 @@ const CardModal = React.memo(
                     {t('common.attachment')}
                   </Button>
                 </AttachmentAddPopup>
+                <FreightCostPopup
+                  onUpdate={handleUpdateCostCenter}
+                  salePrice={salePrice}
+                  purchaseCost={purchaseCost}
+                  addComment={onCommentActivityCreate}
+                >
+                  <Button fluid className={styles.actionButton}>
+                    <Icon name="bus" className={styles.actionIcon} />
+                    {t('common.costFreight')}
+                  </Button>
+                </FreightCostPopup>
                 <CostCenterPopup
                   onUpdate={handleUpdateCostCenter}
                   salePrice={salePrice}
                   purchaseCost={purchaseCost}
+                  addComment={onCommentActivityCreate}
                 >
                   <Button fluid className={styles.actionButton}>
                     <Icon name="dollar" className={styles.actionIcon} />

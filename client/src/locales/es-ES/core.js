@@ -52,6 +52,8 @@ export default {
       createTextFile_title: 'Crear archivo de Texto',
       currentPassword: 'Contraseña Actual',
       costCenter: 'Centro de Costo',
+      costFreight: 'Costo de Flete',
+      globalCost: 'Costo Global',
       date: 'Fecha',
       dueDate_title: 'Fecha de Vencimiento',
       deleteAttachment_title: 'Borrar Adjunto',
