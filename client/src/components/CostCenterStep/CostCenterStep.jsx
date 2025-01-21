@@ -35,6 +35,14 @@ const costCenterOptions = [
   },
 ];
 
+const costCenterEmojiDic = {
+  Maniobra: '🛺🦺',
+  'Estadias/Demoras': '⏳',
+  Reparto: '🚚',
+  'Movimiento en Falso': '🔄❌',
+  Otros: '🔧',
+};
+
 const CostCenterStep = React.memo(({ onUpdate, onClose, purchasePrice, salePrice, addComment }) => {
   const [t] = useTranslation();
   const purchasePriceField = useRef(purchasePrice);
@@ -61,10 +69,9 @@ const CostCenterStep = React.memo(({ onUpdate, onClose, purchasePrice, salePrice
 
     onUpdate(data.purchasePrice, data.salePrice);
     // eslint-disable-next-line no-console
-    console.debug('CostCenterStep.handleSubmit', data);
     addComment({
-      text: `🚀 Cost Added: ${data.costCenter}.
-      Purchase cost:${data.purchasePrice}, Sale price:${data.salePrice}.
+      text: `${costCenterEmojiDic[data.costCenter]} Cost Added: ${data.costCenter}.
+      Purchase cost:${data.purchasePrice},Sale price:${data.salePrice}.
       💰 Revenue: ${data.salePrice - data.purchasePrice}`,
     });
     onClose();
@@ -94,9 +101,7 @@ const CostCenterStep = React.memo(({ onUpdate, onClose, purchasePrice, salePrice
                 selection
                 fluid
                 options={costCenterOptions.map((option) => ({
-                  key: option.key,
-                  text: option.text,
-                  value: option.value,
+                  ...option,
                 }))}
                 placeholder={t('common.selectCostCenter')}
                 value={data.costCenter}

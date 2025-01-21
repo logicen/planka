@@ -33,7 +33,7 @@ const FreightCostStep = React.memo(
       }
 
       addComment({
-        text: `🛳️ Cost Freight Added.
+        text: `🚛 Cost Freight Added.
         Purchase cost:${data.purchasePrice}, Sale price:${data.salePrice}.
         💰 Revenue: ${data.salePrice - data.purchasePrice}`,
       });
