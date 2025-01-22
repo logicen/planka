@@ -70,9 +70,10 @@ const CostCenterStep = React.memo(({ onUpdate, onClose, purchasePrice, salePrice
     onUpdate(data.purchasePrice, data.salePrice);
     // eslint-disable-next-line no-console
     addComment({
-      text: `${costCenterEmojiDic[data.costCenter]} Cost Added: ${data.costCenter}.
-      Purchase cost:${data.purchasePrice},Sale price:${data.salePrice}.
-      💰 Revenue: ${data.salePrice - data.purchasePrice}`,
+      text: `${costCenterEmojiDic[data.costCenter]} Costo Agregado: ${data.costCenter}.
+      Compra:${data.purchasePrice}, Venta:${data.salePrice}.
+      💰 Ganancia: ${data.salePrice - data.purchasePrice}`,
+      isPersisted: true,
     });
     onClose();
   }, [data, onClose, addComment, onUpdate]);

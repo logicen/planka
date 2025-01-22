@@ -33,9 +33,10 @@ const FreightCostStep = React.memo(
       }
 
       addComment({
-        text: `🚛 Cost Freight Added.
-        Purchase cost:${data.purchasePrice}, Sale price:${data.salePrice}.
-        💰 Revenue: ${data.salePrice - data.purchasePrice}`,
+        text: `🚛 Costo de Flete Agregado.
+        Compra:${data.purchasePrice}, Venta:${data.salePrice}.
+        💰 Ganancia: ${data.salePrice - data.purchasePrice}`,
+        isPersisted: true,
       });
 
       onUpdate(data.purchasePrice, data.salePrice);
