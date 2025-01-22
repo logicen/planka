@@ -18,6 +18,10 @@ module.exports = {
       type: 'string',
       required: true,
     },
+    isPersisted: {
+      type: 'boolean',
+      defaultsTo: false,
+    },
   },
 
   exits: {
@@ -51,7 +55,7 @@ module.exports = {
 
     const values = {
       type: Action.Types.COMMENT_CARD,
-      data: _.pick(inputs, ['text']),
+      data: _.pick(inputs, ['text', 'isPersisted']),
     };
 
     const action = await sails.helpers.actions.createOne.with({
