@@ -141,11 +141,15 @@ const CardModal = React.memo(
     );
 
     const handleUpdateCostCenter = useCallback(
-      (newPurchaseCost, newSalePrice) => {
+      (newPurchaseCost, newSalePrice, remove = false) => {
         let newRevenue = parseInt(newSalePrice, 10) - parseInt(newPurchaseCost, 10);
 
         if (revenue) {
-          newRevenue += parseInt(revenue, 10);
+          if (remove) {
+            newRevenue = parseInt(revenue, 10) - parseInt(newRevenue, 10);
+          } else {
+            newRevenue += parseInt(revenue, 10);
+          }
         }
 
         onUpdate({
@@ -480,6 +484,9 @@ const CardModal = React.memo(
               onCommentCreate={onCommentActivityCreate}
               onCommentUpdate={onCommentActivityUpdate}
               onCommentDelete={onCommentActivityDelete}
+              updateRevenue={handleUpdateCostCenter}
+              salesPrice={salePrice}
+              purchaseCost={purchaseCost}
             />
           </Grid.Column>
           {canEdit && (

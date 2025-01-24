@@ -23,6 +23,9 @@ const Activities = React.memo(
     onCommentCreate,
     onCommentUpdate,
     onCommentDelete,
+    updateRevenue,
+    salesPrice,
+    purchaseCost,
   }) => {
     const [t] = useTranslation();
 
@@ -40,8 +43,11 @@ const Activities = React.memo(
     const handleCommentDelete = useCallback(
       (id) => {
         onCommentDelete(id);
+        if (salesPrice && purchaseCost) {
+          updateRevenue(purchaseCost, salesPrice, true);
+        }
       },
-      [onCommentDelete],
+      [onCommentDelete, updateRevenue, salesPrice, purchaseCost],
     );
 
     return (
@@ -107,6 +113,9 @@ Activities.propTypes = {
   onCommentCreate: PropTypes.func.isRequired,
   onCommentUpdate: PropTypes.func.isRequired,
   onCommentDelete: PropTypes.func.isRequired,
+  updateRevenue: PropTypes.func.isRequired,
+  salesPrice: PropTypes.number.isRequired,
+  purchaseCost: PropTypes.number.isRequired,
 };
 
 export default Activities;

@@ -37,6 +37,8 @@ const FreightCostStep = React.memo(
         Compra:${data.purchasePrice}, Venta:${data.salePrice}.
         💰 Ganancia: ${data.salePrice - data.purchasePrice}`,
         isPersisted: true,
+        salePrice: data.salePrice,
+        purchasePrice: data.purchasePrice,
       });
 
       onUpdate(data.purchasePrice, data.salePrice);
