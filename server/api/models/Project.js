@@ -76,6 +76,10 @@ module.exports = {
       collection: 'Board',
       via: 'projectId',
     },
+    projectRevenue: {
+      type: 'string',
+      columnName: 'project_revenue',
+    },
   },
 
   customToJSON() {

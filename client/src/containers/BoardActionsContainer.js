@@ -16,11 +16,13 @@ const mapStateToProps = (state) => {
   const filterText = selectors.selectFilterTextForCurrentBoard(state);
   const currentUserMembership = selectors.selectCurrentUserMembershipForCurrentBoard(state);
   const revenue = selectors.getBoardRevenue(state);
+  const projectRevenue = selectors.selectProjectRevenue(state);
 
   const isCurrentUserEditor =
     !!currentUserMembership && currentUserMembership.role === BoardMembershipRoles.EDITOR;
 
   return {
+    projectRevenue,
     revenue,
     memberships,
     labels,

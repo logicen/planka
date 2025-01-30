@@ -95,7 +95,43 @@ export const selectIsCurrentUserManagerForCurrentProject = createSelector(
   },
 );
 
+/**
+ * Selects project revenue for current project
+ * a project has many boards and boards have many cards
+ * so, get project by id then get the boards associated to the project
+ * and finally get the cards associated to the boards
+ */
+export const selectProjectRevenue = createSelector(
+  orm,
+  (state) => selectPath(state).projectId,
+  ({ Project }, id) => {
+    if (!id) {
+      return id;
+    }
+
+    const projectModel = Project.withId(id);
+
+    if (!projectModel) {
+      return projectModel;
+    }
+
+    let revenue = 0;
+
+    projectModel.boards.toModelArray().forEach((boardModel) => {
+      revenue += boardModel.cards.toModelArray().reduce((acc, cardModel) => {
+        if (!cardModel.revenue) {
+          return acc;
+        }
+        return parseInt(cardModel.revenue, 10) + parseInt(acc, 10);
+      }, 0);
+    });
+
+    return revenue;
+  },
+);
+
 export default {
+  selectProjectRevenue,
   selectCurrentProject,
   selectManagersForCurrentProject,
   selectBoardsForCurrentProject,

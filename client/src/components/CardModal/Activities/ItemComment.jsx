@@ -53,12 +53,14 @@ const ItemComment = React.memo(
                 </span>
                 {canEdit && (
                   <Comment.Actions>
-                    <Comment.Action
-                      as="button"
-                      content={t('action.edit')}
-                      disabled={!isPersisted}
-                      onClick={handleEditClick}
-                    />
+                    {!data.isPersisted && (
+                      <Comment.Action
+                        as="button"
+                        content={t('action.edit')}
+                        disabled={!isPersisted}
+                        onClick={handleEditClick}
+                      />
+                    )}
                     <DeletePopup
                       title="common.deleteComment"
                       content="common.areYouSureYouWantToDeleteThisComment"
